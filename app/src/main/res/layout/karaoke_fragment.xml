@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KaraokeFragment">
+    <Button
+        android:id="@+id/start_recording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="start recording"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/stop_recording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="stop recording"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_recording" />
+
+    <Button
+        android:id="@+id/pause_recording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pause recording"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stop_recording"  />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pause_recording"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="7dp"
+        android:layout_marginTop="20dp"
+        android:elevation="5dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/player_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/karaoke"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Recorded Audio"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/play_pause"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:id="@+id/karaoke_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/karaoke"
+
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <Button
+            android:id="@+id/play_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pause/stop"
+            app:layout_constraintTop_toBottomOf="@id/karaoke_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
