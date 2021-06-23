@@ -15,7 +15,7 @@ As I love singing, and found these karaoke applications charging bomb for using 
 - Additional audio filters on the karaoke.
 
 Need more details on the SDK please follow my medium article 
-[a link](https://preethiraopn1992.medium.com/android-karaoke-sdk-with-vocal-suppression-in-the-original-songs-9e5f1c8f7785)
+[medium-preethi](https://preethiraopn1992.medium.com/android-karaoke-sdk-with-vocal-suppression-in-the-original-songs-9e5f1c8f7785)
 
 
 
