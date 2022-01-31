@@ -8,7 +8,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
+import com.shri.karaokesdk.ErrorMessage;
 import com.shri.karaokesdk.AudioRecorderCallback;
+import com.shri.karaokesdk.ErrorValues;
 import com.shri.karaokesdk.audiomodule.IMusicExpoterCallback;
 import com.shri.karaokesdk.audiomodule.filter.Delay;
 import com.shri.karaokesdk.audiomodule.filter.GainProcessor;
@@ -135,7 +137,7 @@ import static com.shri.karaokesdk.audiomodule.utility.Utils.scaleSamples;
             mMovieExporter.initExporter();
             mMovieExporter.prepareVideoEncoder();
         }catch (IOException e) {
-            mAudioRecorderCallback.onRecordingError();
+            mAudioRecorderCallback.onRecordingError(new ErrorMessage("error while preparing encoder in handlePrepareEncoder", ErrorValues.ENCODER_ERROR));
             e.printStackTrace();
         }
 
@@ -148,7 +150,7 @@ import static com.shri.karaokesdk.audiomodule.utility.Utils.scaleSamples;
             gainProcessor = new GainProcessor(Delay.defaultInputGain/100);
             mMovieExporter.prepareVideoEncoder();
         } catch (IOException e) {
-            mAudioRecorderCallback.onRecordingError();
+            mAudioRecorderCallback.onRecordingError(new ErrorMessage("handle prepare encoder input file error",ErrorValues.ENCODER_ERROR));
             e.printStackTrace();
         }
     }

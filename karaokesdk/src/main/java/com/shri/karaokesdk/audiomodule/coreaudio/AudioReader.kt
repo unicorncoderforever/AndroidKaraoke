@@ -2,6 +2,8 @@ package com.shri.karaokesdk.audiomodule.coreaudio
 
 import android.media.MediaFormat
 import android.util.Log
+import com.shri.karaokesdk.ErrorMessage
+import com.shri.karaokesdk.ErrorValues
 import com.shri.karaokesdk.audiomodule.coreaudio.UCAudioExtractor.UCAudioSampleCallback
 import com.shri.karaokesdk.audiomodule.model.AudioSample
 import java.io.File
@@ -25,7 +27,7 @@ internal class AudioReader(private val requiredSampleRate: Int, private val mCal
     interface IAudioStatusProvider {
         fun audioReachedEndOfStream()
         fun onInitialBufferingComplete()
-        fun onDecoderError()
+        fun onDecoderError(errorCode : ErrorMessage)
     }
 
     private var mAudioExtractor: UCAudioExtractor? = null
@@ -42,7 +44,7 @@ internal class AudioReader(private val requiredSampleRate: Int, private val mCal
             mAudioExtractor!!.setupDecoder()
             mSamples = CopyOnWriteArrayList()
         } catch (e: IOException) {
-            mCallback.onDecoderError();
+            mCallback.onDecoderError(ErrorMessage(e.message,ErrorValues.DECODER_ERROR));
             e.printStackTrace()
         }
     }
@@ -66,7 +68,7 @@ internal class AudioReader(private val requiredSampleRate: Int, private val mCal
                 mAudioExtractor!!.doExtractionForRecorder()
             }
         }catch (exception:IllegalStateException){
-            mCallback.onDecoderError()
+            mCallback.onDecoderError(ErrorMessage("audio sample extractor fail to fetch samples",ErrorValues.DECODER_ERROR))
         }
 
     }
@@ -78,7 +80,7 @@ internal class AudioReader(private val requiredSampleRate: Int, private val mCal
                 mAudioExtractor!!.stopDecoding()
             }
         }catch (exception:IllegalStateException){
-            mCallback.onDecoderError()
+            mCallback.onDecoderError(ErrorMessage("Error while stopping recorder",ErrorValues.DECODER_ERROR))
         }
     }
 
@@ -116,8 +118,8 @@ internal class AudioReader(private val requiredSampleRate: Int, private val mCal
 
     }
 
-    override fun onDecoderError() {
-        mCallback.onDecoderError()
+    override fun onDecoderError(errorMessage: ErrorMessage) {
+        mCallback.onDecoderError(errorMessage)
     }
 
     val audioSamples: AudioSample?

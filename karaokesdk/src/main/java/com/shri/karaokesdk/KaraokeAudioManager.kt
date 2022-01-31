@@ -59,8 +59,8 @@ class KaraokeAudioManager(context: Context,val recorderCallback: AudioRecorderCa
         recorderCallback.onRecordingComplete(path,uri)
     }
 
-    override fun onRecordingError() {
-        recorderCallback.onRecordingError()
+    override fun onRecordingError(errorMessage: ErrorMessage) {
+        recorderCallback.onRecordingError(errorMessage)
     }
 
 }

@@ -103,7 +103,7 @@ import java.util.Objects;
                         Objects.requireNonNull(Looper.myLooper()).quit();
                         break;
                     default:
-                        throw new RuntimeException("Unhandled msg what=" + what);
+                        throw new RuntimeException("Unhandled msg what= at audio recorder" + what);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

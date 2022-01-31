@@ -7,5 +7,5 @@ import android.net.Uri
  */
 interface AudioRecorderCallback {
     fun onRecordingComplete(path:String,uri: Uri);
-    fun onRecordingError();
+    fun onRecordingError(errorMessage: ErrorMessage);
 }

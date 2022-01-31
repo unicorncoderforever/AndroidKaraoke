@@ -5,6 +5,8 @@ import android.media.MediaCodec
 import android.media.MediaExtractor
 import android.media.MediaFormat
 import android.util.Log
+import com.shri.karaokesdk.ErrorMessage
+import com.shri.karaokesdk.ErrorValues
 import com.shri.karaokesdk.audiomodule.model.UCAudioInfo
 import com.shri.karaokesdk.audiomodule.resample.Resampler
 import java.io.File
@@ -249,7 +251,7 @@ internal class UCAudioExtractor(
         //        void loopReset();
         fun audioReachedEndOfStream()
         fun onReleaseAudioDecoder()
-        fun onDecoderError()
+        fun onDecoderError(errorMessage: ErrorMessage)
     }
 
     /**
@@ -310,7 +312,7 @@ internal class UCAudioExtractor(
                 )
             }
         } catch (e: IOException) {
-            mAudioCallback.onDecoderError()
+            mAudioCallback.onDecoderError(ErrorMessage("error while opening audio file in method @openAudioFile",ErrorValues.DECODER_ERROR))
             e.printStackTrace()
         }
 

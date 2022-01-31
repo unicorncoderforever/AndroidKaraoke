@@ -7,6 +7,7 @@ import android.net.Uri
 import android.util.Log
 import com.shri.karaokesdk.AudioController
 import com.shri.karaokesdk.AudioRecorderCallback
+import com.shri.karaokesdk.ErrorMessage
 
 import com.shri.karaokesdk.audiomodule.coreaudio.AudioReader.IAudioStatusProvider
 import com.shri.karaokesdk.audiomodule.coreaudio.MediaMetaDataRetriever.getAudioMetaData
@@ -116,8 +117,8 @@ internal class AudioManager(private val mContext: Context,val audioRecorderCallb
         computeBufferDelay()
     }
 
-    override fun onDecoderError() {
-        audioRecorderCallback.onRecordingError()
+    override fun onDecoderError(errorMessage: ErrorMessage) {
+        audioRecorderCallback.onRecordingError(errorMessage)
         stopRecording()
     }
 
@@ -142,8 +143,8 @@ internal class AudioManager(private val mContext: Context,val audioRecorderCallb
         audioRecorderCallback.onRecordingComplete(path,uri)
     }
 
-    override fun onRecordingError() {
-       audioRecorderCallback.onRecordingError()
+    override fun onRecordingError(errorMessage: ErrorMessage) {
+       audioRecorderCallback.onRecordingError(errorMessage)
     }
 
 
