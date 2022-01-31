@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.shri.androidkaraoke.musicpicker.model.UCMusicListModel
 import com.shri.androidkaraoke.utility.UCAudioTrackPlayer
 import com.shri.androidkaraoke.utility.Utils
 import com.shri.karaokesdk.AudioRecorderCallback
+import com.shri.karaokesdk.ErrorMessage
 import com.shri.karaokesdk.KaraokeAudioManager
 
 /**
@@ -44,6 +46,7 @@ class KaraokeFragment : Fragment() {
     }
 
 
+    private  val TAG = "KaraokeFragment"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         musicModel = arguments?.getSerializable("music") as UCMusicListModel
@@ -63,8 +66,9 @@ class KaraokeFragment : Fragment() {
                     })
                 }
 
-                override fun onRecordingError() {
+                override fun onRecordingError(errorMessage: ErrorMessage) {
                 //TODO show some error message
+                    Log.e(TAG, "onRecordingError: "+errorMessage.errorMessage)
                 }
 
             })
